@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TheStill Journals - Diaries, Journals, & Calendars</title>
+    <!-- Bootstrap CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+           --primary: #f07c42;
+            --primary-dark: #e96a2e;
+            
+          
+            --background-light: #e8e4e1; 
+            
+            --text-light: #1b120d;
+            --subtle-light: #f3ebe7;
+            --muted-light: #9a664c;
+            --max-width: 1180px;
+            --bottom-nav-height: 65px;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-light);
+            line-height: 1.45;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* --- Header / Navbar --- */
+        .navbar {
+          
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(16,24,40,0.04);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .navbar-brand svg { color: var(--primary); }
+        .nav-link { 
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 6px 8px;
+            border-radius: 8px;
+        }
+        .nav-link:hover { 
+            color: var(--primary); 
+            background-color: rgba(240, 124, 66, 0.08);
+        }
+        .btn-icon {
+            background-color: var(--subtle-light);
+            color: var(--text-light);
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-icon:hover {
+            background-color: rgba(240, 124, 66, 0.12);
+            color: var(--primary);
+        }
+        /* Cart Badge */
+        .cart-count-badge { 
+            background-color: var(--primary); 
+            color: white; 
+            font-size: 0.75rem; 
+            font-weight: 700;
+        }
+        /* --- Hero Section --- */
+        .hero-section {
+            background-image: url("Product-Images/heroimg.png");
+            background-size: cover;
+            background-position: center;
+            min-height: 520px;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            margin-top: 3rem;
+            color: white;
+        }
+        .hero-section h1 { 
+            font-weight: 900; 
+            font-size: 2.6rem;
+            line-height: 1.02;
+            margin-bottom: 12px;
+            letter-spacing: -0.6px;
+        }
+        .hero-eyebrow {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.92);
+            display: inline-block;
+        }
+        .hero-copy {
+            font-size: 1.05rem;
+            margin-bottom: 22px;
+            color: rgba(255,255,255,0.92);
+            max-width: 52ch;
+        }
+        .btn-primary-custom {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-color: var(--primary);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 6px 20px rgba(240,124,66,0.18);
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid transparent;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-6px);
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+            border-color: var(--primary-dark);
+            color: white;
+            box-shadow: 0 10px 25px rgba(240,124,66,0.25);
+        }
+        .btn-outline-custom {
+            padding: 10px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.92);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn-outline-custom:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        /* --- Product Section --- */
+        .maincard-container{ 
+            width:100%; 
+            margin:2rem auto 4rem; 
+        }
+        .product-grid { 
+            display:flex; 
+            flex-wrap:wrap; 
+            gap:1.25rem; 
+            margin-top: 1rem; 
+            justify-content: center;
+        }
+        .card { 
+            width:18rem; 
+            border-radius:12px; 
+            overflow:hidden; 
+            box-shadow:0 8px 20px rgba(0,0,0,0.06); 
+            border: none;
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(12,18,26,0.06);
+        }
+        .card .card-body { 
+            text-align:center; 
+            padding:1rem; 
+        }
+        .btn-buy { 
+            background:var(--primary); 
+            color:#ffffff; 
+            border:none; 
+            padding:.75rem 1rem; 
+            border-radius:8px; 
+            cursor:pointer; 
+            font-weight:500;
+            transition: all 0.2s;
+        }
+        .btn-buy:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+/* --- New Search Bar Styles --- */
+.product-search-bar {
+max-width: 700px;
+margin: 0 auto 2rem auto;
+}
+.product-search-bar .form-control {
+padding: 0.75rem 1.25rem;
+border-radius: 50px !important;
+border: 1px solid #ddd;
+}
+.product-search-bar .form-control:focus {
+border-color: var(--primary);
+box-shadow: 0 0 0 0.25rem rgba(240,124,66,0.25);
+}
+.product-search-bar .input-group-text {
+border-radius: 50px;
+background-color: transparent;
+border-left: 0;
+}
+/* Filter buttons */
+.filter-buttons { 
+    text-align: center; 
+    margin-bottom: 2rem; 
+}
+.filter-buttons .btn {
+    margin: 0 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.filter-buttons .btn.active, .filter-buttons .btn:hover {
+    background-color: var(--primary); 
+    color: #fff; 
+    border-color: var(--primary);
+}
+/* Product Modal */
+.product-page { 
+    display: flex; 
+    flex-wrap: wrap; 
+    padding: 2rem 5%; 
+    height: 100%; 
+    box-sizing: border-box; 
+}
+.product-image { 
+    flex: 1; 
+    max-width: 500px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+.product-image img { 
+    width: 100%; 
+    flex-grow: 1; 
+    object-fit: cover; 
+    border-radius: 20px; 
+}
+.product-info { 
+    flex: 1; 
+    max-width: 45%; 
+    display: flex; 
+    flex-direction: column; 
+    overflow-y: auto; 
+    padding-left: 2rem; 
+}
+.product-info h1 { 
+    font-weight: 800; 
+}
+.price h2 { 
+    color: var(--primary); 
+    font-weight: 700; 
+}
+.color-circle { 
+    width: 32px; 
+    height: 32px; 
+    border-radius: 50%; 
+    border: 2px solid transparent; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, border-color 0.2s ease; 
+}
+.color-circle:hover { 
+    transform: scale(1.1); 
+}
+.color-circle.active { 
+    border-color: var(--primary); 
+    box-shadow: 0 0 0 3px rgba(240,124,66,0.2); 
+}
+.btn-option { 
+    border: 2px solid #ddd; 
+    background: #fff; 
+    border-radius: 8px; 
+    padding: 6px 16px; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+}
+.btn-option.selected, .btn-option:hover { 
+    background: var(--primary); 
+    color: #fff; 
+    border-color: var(--primary); 
+}
+.quantity-box { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    border: 2px solid #ddd; 
+    border-radius: 8px; 
+    width: 120px; 
+    padding: 4px 10px; 
+}
+.qty-btn { 
+    border: none; 
+    background: none; 
+    font-size: 20px; 
+    font-weight: bold; 
+    color: var(--primary); 
+    cursor: pointer; 
+}
+#cart-btn, .btn-checkout { 
+    background-color: var(--primary); 
+    color: #fff; 
+    border: none; 
+    border-radius: 8px; 
+    padding: 10px 20px; 
+    font-weight: 600; 
+    transition: all 0.3s ease; 
+}
+#cart-btn:hover, .btn-checkout:hover { 
+    background-color: var(--primary-dark); 
+    transform: translateY(-2px); 
+}
+.modal-body.product-modal-body { 
+    padding: 0; 
+    height: calc(100vh - 60px); 
+    overflow: hidden; 
+}
+/* --- Craft Section --- */
+.craft-box{
+    width:100%;
+    padding:80px 20px;
+    background:#f5f7fa;
+    border-radius:16px;
+    margin-top:60px;
+}
+.craft-wrap{
+    max-width:var(--max-width);
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+}
+.craft-text{
+    width:50%;
+}
+.craft-eyebrow{
+    color:#f07c42;
+    font-size:0.9rem;
+    font-weight:700;
+    margin-bottom:8px;
+}
+.craft-title{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:16px;
+}
+.craft-desc{
+    font-size:1rem;
+    color:#555;
+    line-height:1.6;
+    margin-bottom:22px;
+}
+.craft-list{
+    list-style:none;
+    padding:0;
+}
+.craft-list li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1rem;
+    color:#333;
+    margin-bottom:12px;
+}
+.craft-list li i{
+    color:#f07c42;
+    font-size:1.2rem;
+}
+.craft-img{
+    width:50%;
+    display:flex;
+    justify-content:center;
+}
+.craft-img img{
+    width:100%;
+    max-width:380px;
+    border-radius:16px;
+}
+.craft-img.center-img {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:40px;
+}
+.craft-img.center-img img {
+    max-width:360px;
+    width:100%;
+    border-radius:16px;
+}
+/* --- Features Section, Reviews, Footer, Checkout Modal etc. --- */
+.features-section{margin-top:40px;padding:48px 22px;border-radius:12px;background:linear-gradient(180deg,#fafafc,#f5f7fa);width:100%}.features-grid{max-width:var(--max-width);margin:0 auto;display:grid;gap:28px;grid-template-columns:1fr 1fr;align-items:center}.feature-left{padding-right:12px}.feature-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}.feature-icon{width:44px;height:44px;border-radius:10px;background:rgba(240,124,66,.12);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}.feature-preview{display:flex;justify-content:center;align-items:center}.feat-card{width:260px;border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(12,18,26,.06)}.feat-card img{width:100%}#about{background-color:var(--background-light);padding: 20px 0; margin-top:60px}.about-img{aspect-ratio:1/1;background-size:cover;background-position:center;border-radius:16px}.form-control:focus{border-color:var(--primary);box-shadow:0 0 0 .25rem rgba(240,124,66,.25)}.reviews-section{margin-top:40px;padding:40px 22px;border-radius:12px;background:linear-gradient(180deg,#0b1220,#0e1722);color:#fff;overflow:hidden;position:relative;width:100%}.reviews-inner{max-width:var(--max-width);margin:0 auto;display:flex;gap:22px;justify-content:space-between;align-items:center}.reviews-list{display:flex;gap:18px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;width:100%}.reviews-list::-webkit-scrollbar{display:none}.reviews-track{display:flex;gap:18px;animation:scrollReviews 30s linear infinite}.review-card{min-width:260px;padding:18px;border-radius:12px;background:rgba(255,255,255,.05);box-shadow:0 18px 40px rgba(3,6,12,.35);flex-shrink:0}.review-card p{color:rgba(255,255,255,.92);font-size:.95rem;margin-bottom:10px}@keyframes scrollReviews{0%{transform:translateX(0)}100%{transform:translateX(calc(-260px * 4 - 18px * 3))}}.footer-main{display:flex;justify-content:center;width:100%}.site-footer{margin-top:26px;border-top-left-radius:1.2rem;border-top-right-radius:1.2rem;width:100%;display:flex;flex-direction:column;background:var(--primary);color:#fff;padding:60px 20px 30px}.footer-container{max-width:1200px;display:flex;justify-content:center;gap:5.5rem;flex-wrap:wrap;margin:0 auto}.footer-brand h2{font-size:1.6rem;font-weight:800;margin-bottom:10px}.footer-links a{display:block;color:#ddd;text-decoration:none;margin-bottom:6px;transition:.2s}.footer-links a:hover{color:#fff}.footer-bottom{text-align:center;margin-top:40px;color:#fff;font-size:.9rem}.checkout-progress-bar{display:flex;justify-content:space-between;margin-bottom:1.5rem;counter-reset:step}.checkout-progress-bar .step{text-align:center;position:relative;width:33.33%}.checkout-progress-bar .step:before{content:counter(step);counter-increment:step;width:30px;height:30px;line-height:30px;border:2px solid #ddd;display:block;text-align:center;margin:0 auto 10px;border-radius:50%;background-color:#fff}.checkout-progress-bar .step:after{content:'';width:100%;height:2px;background-color:#ddd;position:absolute;left:-50%;top:15px;z-index:-1}.checkout-progress-bar .step:first-child:after{content:none}.checkout-progress-bar .step.active:before{border-color:var(--primary);background-color:var(--primary);color:#fff}.checkout-progress-bar .step.active+.step:after{background-color:var(--primary)}#credit-card-form{background-color:#f8f9fa;padding:1rem;border-radius:8px;margin-top:1rem}
+/* --- New About Us Section Styles --- */
+.our-story, .our-mission {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+.our-story h2, .our-mission h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+.our-story p {
+    max-width: 56rem;
+    margin: 0 auto 2rem auto;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #555;
+}
+.values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 64rem;
+    margin: 3rem auto 0;
+}
+.value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+.icon-container {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--subtle-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+.icon-container .material-symbols-outlined {
+    font-size: 1.8rem;
+}
+.value h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.value p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    max-width: 300px;
+}
+/* --- Bottom Navigation Bar (Mobile Only) --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--bottom-nav-height);
+    background-color: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    display: none; 
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1030;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #666;
+    font-size: 11px;
+    font-weight: 500;
+    width: 20%;
+    height: 100%;
+    transition: color 0.2s;
+    position: relative;
+}
+.bottom-nav-item span.material-symbols-outlined {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+.bottom-nav-item.active {
+    color: var(--primary);
+}
+.bottom-nav-item:active {
+    background-color: rgba(0,0,0,0.03);
+}
+.bottom-cart-badge {
+    position: absolute;
+    top: 8px;
+    right: 25%;
+    transform: translateX(50%);
+    padding: 2px 5px;
+    font-size: 10px;
+}
+/* --- Responsive Adjustments --- */
+@media (min-width: 768px) {
+    .values {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 992px){
+    .product-page{flex-direction:column}.product-info{padding-left:0;margin-top:2rem;max-width:100%}.craft-wrap{flex-direction:column;text-align:center;gap:30px}.craft-text,.craft-img{width:100%}.craft-list{display:inline-block;text-align:left}.features-grid{grid-template-columns:1fr;text-align:center}.feature-left{padding-right:0}.feature-item{justify-content:center}
+}
+@media (max-width: 768px) {
+    .bottom-nav { display: flex; }
+    .footer-main { display: none; }
+    body { padding-bottom: 80px; }
+    .navbar #cart-icon { display: none !important; }
+    .hero-section h1 { font-size: 2.2rem; }
+    .hero-section { min-height: 400px; }
+    .craft-box, .features-section, .reviews-section { padding: 30px 15px; }
+    .filter-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 10px;
+        text-align: left;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .filter-buttons::-webkit-scrollbar { display: none; }
+    .filter-buttons .btn { flex-shrink: 0; }
+}
+@media (max-width: 576px) {
+    .hero-section h1 { font-size: 1.8rem; }
+    .hero-section { min-height: 350px; margin-top: 1rem; }
+    .craft-title { font-size: 1.6rem; }
+    /* Hiding both craft images on extra-small screens */
+    .craft-img,
+    .craft-img.center-img {
+        display: none;
+    }
+    .our-story h2, .our-mission h2 {
+        font-size: 1.8rem;
+    }
+}
+/* Typewriter effect styles */
+#typeText { 
+    color: white; 
+    border-right: 3px solid white; 
+    padding-right: 5px; 
+    animation: cursorBlink .7s infinite; 
+    display: inline-block; 
+    min-height: 1.2em; 
+}
+@keyframes cursorBlink { 
+    0%, 100% { border-color: white; } 
+    50% { border-color: transparent; } 
+}
+
+</style>
+</head>
+
+
+<body data-bs-spy="scroll" data-bs-target=".bottom-nav" data-bs-offset="100">
+    <!-- Sticky TopNavBar -->
+    <header class="navbar navbar-expand-md sticky-top">
+        <div class="container-xl">
+            <a class="navbar-brand d-flex align-items-center text-decoration-none" href="#">
+                <img src="Product-Images/logo.png" alt="The Still Journals Logo" style="height: 3vh; width: auto; margin-right: 0.5rem;">
+                <h2 class="h5 fw-bold ms-2 mb-0 text-dark">The Still Journals</h2>
+            </a>
+            <nav class="d-none d-md-flex ms-auto">
+                <a class="nav-link me-4" href="#hero">Home</a>
+                <a class="nav-link me-4" href="#products">Products</a>
+                <a class="nav-link me-4" href="#about">About Us</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </nav>
+            <div class="d-flex align-items-center ms-4">
+                <!-- Cart Icon Button -->
+                <button class="btn btn-icon d-flex justify-content-center align-items-center position-relative" id="cart-icon" aria-label="Open cart">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-count-badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="container-xl py-5">
+        <!-- Hero Section -->
+        <section id="hero" class="mb-5">
+            <div class="hero-section d-flex flex-column justify-content-center align-items-start p-4 p-md-5">
+                <div class="hero-eyebrow">New • Spring Collection</div>
+                <h1 class="display-4"><span id="typeText"></span></h1>
+                <p class="hero-copy d-none d-md-block">
+                    Explore our collection of artisan diaries, journals & calendars — crafted with premium paper, smooth covers, and elegant details made for everyday use.
+                </p>
+                <div class="hero-cta">
+                    <a href="#products" class="btn-primary-custom me-3">Shop Collection</a>
+                    <a href="#products" class="btn-outline-custom">View All Journals</a>
+                </div>
+            </div>
+        </section>
+        <!-- Products Section -->
+        <section class="maincard-container" id="products">
+            <h2 class="h2 fw-bold mb-4 text-center">Our Products</h2>
+<!-- New Product Search Bar -->
+<div class="product-search-bar px-3 px-md-0">
+        <div class="input-group">
+            <input type="search" class="form-control" id="product-search-input" placeholder="Search for journals, diaries, calendars...">
+            <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>
+        </div>
+    </div>
+    <div class="filter-buttons">
+        <button class="btn active" data-filter="all">All</button>
+        <button class="btn" data-filter="journal">Journals</button>
+        <button class="btn" data-filter="diary">Diaries</button>
+        <button class="btn" data-filter="calendar">Calendars</button>
+    </div>
+    <div class="product-grid d-flex flex-wrap gap-3 justify-content-center">
+        <!-- Journal Cards -->
+        <div class="card" data-aos="fade-up" data-type="journal">
+            <img src="Product-Images/journaltype1-blue.png" class="card-img-top" alt="Blue Artisan Journal">
+            <div class="card-body">
+                <h5 class="prod-title">Blue Artisan Journal</h5>
+                <p class="text-muted prod-desc">A deep-blue artisan journal with premium pages.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="journal1">Buy Now</a>
+                    <div style="color:var(--muted-light);">$28.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="journal">
+            <img src="Product-Images/journaltype2-brown.png" class="card-img-top" alt="Sandstone Planner">
+            <div class="card-body">
+                <h5 class="prod-title">Sandstone Planner</h5>
+                <p class="text-muted prod-desc">Minimalist sand-toned journal with smooth paper.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="journal2">Buy Now</a>
+                    <div style="color:var(--muted-light);">$28.00</div>
+                </div>
+            </div>
+        </div>
+        <!-- Diary Cards -->
+        <div class="card" data-aos="fade-up" data-type="diary">
+            <img src="Product-Images/diarytype1-green.png" class="card-img-top" alt="Classic Diary">
+            <div class="card-body">
+                <h5 class="prod-title">Classic Diary</h5>
+                <p class="text-muted prod-desc">Classic diary with lined pages for daily thoughts.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="diary1">Buy Now</a>
+                    <div style="color:var(--muted-light);">$22.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="diary">
+            <img src="Product-Images/diarytype2-black.png" class="card-img-top" alt="Compact Diary">
+            <div class="card-body">
+                <h5 class="prod-title">Compact Diary</h5>
+                <p class="text-muted prod-desc">A small, compact diary for everyday planning on the go.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="diary2">Buy Now</a>
+                    <div style="color:var(--muted-light);">$22.00</div>
+                </div>
+            </div>
+        </div>
+        <!-- Calendar Cards -->
+        <div class="card" data-aos="fade-up" data-type="calendar">
+            <img src="Product-Images/calendartype1-black.png" class="card-img-top" alt="Artisan Calendar">
+            <div class="card-body">
+                <h5 class="prod-title">Artisan Calendar</h5>
+                <p class="text-muted prod-desc">Yearly calendar with unique artisan illustrations.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="calendar1">Buy Now</a>
+                    <div style="color:var(--muted-light);">$16.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="calendar">
+            <img src="Product-Images/calendartype2-white.png" class="card-img-top" alt="Wall Calendar">
+            <div class="card-body">
+                <h5 class="prod-title">Wall Calendar</h5>
+                <p class="text-muted prod-desc">A large wall calendar with plenty of space for notes.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="calendar2">Buy Now</a>
+                    <div style="color:var(--muted-light);">$16.00</div>
+                </div>
+            </div>
+        </div>
+        <!-- ADDED: 6 New Product Cards -->
+        <div class="card" data-aos="fade-up" data-type="journal">
+            <img src="Product-Images/premium-journaltype3-black.png" class="card-img-top" alt="Premium Journal">
+            <div class="card-body">
+                <h5 class="prod-title">Premium Journal</h5>
+                <p class="text-muted prod-desc">A premium black journal for the discerning writer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="journal3">Buy Now</a>
+                    <div style="color:var(--muted-light);">$32.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="diary">
+            <img src="Product-Images/premium-diarytype4-black.png" class="card-img-top" alt="Executive Diary">
+            <div class="card-body">
+                <h5 class="prod-title">Executive Diary</h5>
+                <p class="text-muted prod-desc">Sleek and professional black diary for your schedule.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="diary3">Buy Now</a>
+                    <div style="color:var(--muted-light);">$26.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="calendar">
+            <img src="Product-Images/calendartype3-blue.png"  class="card-img-top" alt="Desk Calendar" style="height: 285px;">
+            <div class="card-body">
+                <h5 class="prod-title">Desk Calendar</h5>
+                <p class="text-muted prod-desc">A stylish desk calendar with scenic views.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="calendar3">Buy Now</a>
+                    <div style="color:var(--muted-light);">$18.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="journal">
+            <img src="Product-Images/journaltype4-white.png" class="card-img-top" alt="Minimalist Journal">
+            <div class="card-body">
+                <h5 class="prod-title">Minimalist Journal</h5>
+                <p class="text-muted prod-desc">A clean and simple white journal for your thoughts.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="journal4">Buy Now</a>
+                    <div style="color:var(--muted-light);">$25.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="diary">
+            <img src="Product-Images/diarytype5-white.png" class="card-img-top" alt="Ivory Diary">
+            <div class="card-body">
+                <h5 class="prod-title">Simple Diary</h5>
+                <p class="text-muted prod-desc">An elegant ivory diary with a soft-touch cover.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="diary4">Buy Now</a>
+                    <div style="color:var(--muted-light);">$26.00</div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-type="calendar">
+            <img src="Product-Images/nature-calendartype4-green.png" class="card-img-top" alt="Nature Calendar">
+            <div class="card-body">
+                <h5 class="prod-title">Nature Calendar</h5>
+                <p class="text-muted prod-desc">Wall calendar featuring stunning nature photography.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="#" class="btn-buy open-product" data-product="calendar4">Buy Now</a>
+                    <div style="color:var(--muted-light);">$20.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Craft Section -->
+<section class="craft-section" id="craft">
+    <section class="craft-box">
+        <div class="craft-wrap">
+            <div class="craft-text" data-aos="fade-right">
+                <div class="craft-eyebrow">Premium Materials</div>
+                <h2 class="craft-title">Crafted with care — built to inspire your writing</h2>
+                <p class="craft-desc">
+                    Every journal we make is designed using high-quality paper, smooth textures,
+                    and strong stitching for long-lasting use.
+                </p>
+                <ul class="craft-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Smooth 200gsm paper</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Strong stitched binding</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Matte premium covers</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Long-lasting durability</li>
+                </ul>
+            </div>
+            <div class="craft-img" data-aos="fade-left">
+                <img src="Product-Images/premium-journaltype3-black.png" alt="Crafted Journal">
+            </div>
+        </div>
+    </section>
+    <section class="craft-box">
+        <div class="craft-wrap" style="flex-direction:row-reverse;">
+            <div class="craft-text" data-aos="fade-left">
+                <div class="craft-eyebrow">Elegant Quality</div>
+                <h2 class="craft-title">Built with details that elevate your everyday</h2>
+                <p class="craft-desc">
+                    Our journals combine style and functionality, giving you a premium writing
+                    experience from the first page to the last.
+                </p>
+                <ul class="craft-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Thick no-bleed pages</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Soft-touch matte covers</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Comfortable size</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Designed to inspire</li>
+                </ul>
+            </div>
+            <div class="craft-img center-img" data-aos="fade-right">
+                <img src="Product-Images/premium-diarytype4-black.png" alt="Crafted Journal">
+            </div>
+        </div>
+    </section>
+</section>
+<!-- Features Section -->
+<section class="features-section" id="features">
+    <div class="features-grid container-centered">
+        <div class="feature-left" data-aos="fade-right">
+            <div class="eyebrow">What makes them special</div>
+            <h3 style="font-size:1.6rem; margin:8px 0;">Designed for everyday rituals</h3>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="bi bi-pencil"></i></div>
+                <div>
+                    <strong>Thoughtful layouts</strong>
+                    <div style="color:var(--muted-light);">Monthly + weekly templates built for habit formation.</div>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="bi bi-droplet-half"></i></div>
+                <div>
+                    <strong>Paper that loves ink</strong>
+                    <div style="color:var(--muted-light);">High GSM paper reduces bleed.</div>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="bi bi-box-seam"></i></div>
+                <div>
+                    <strong>Gift-ready packaging</strong>
+                    <div style="color:var(--muted-light);">Perfect for gifting.</div>
+                </div>
+            </div>
+        </div>
+        <div class="feature-preview" data-aos="fade-left">
+            <div class="feat-card">
+                <img src="Product-Images/journaltype1-black.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Reviews Section -->
+<!-- About Us Section -->
+<section id="about">
+    <div class="our-story" data-aos="fade-up">
+        <h2>Our Story</h2>
+        <p>Our brand was born from a simple belief: that in a fast-paced digital world, the timeless act of putting pen to paper offers a unique space for clarity, creativity, and connection. It all started with a love for beautiful stationery and a desire to create products that weren't just functional, but also a joy to use. We meticulously design each diary, journal, and calendar to be a beautiful companion on your journey of organization and self-discovery.</p>
+    </div>
+    <div class="our-mission" data-aos="fade-up">
+        <h2>Our Mission & Values</h2>
+        <div class="values">
+            <div class="value">
+                <div class="icon-container">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                </div>
+                <h3>Creativity</h3>
+                <p>To provide beautiful tools that unlock your imagination and inspire new ideas.</p>
+            </div>
+            <div class="value">
+                <div class="icon-container">
+                    <span class="material-symbols-outlined">event_note</span>
+                </div>
+                <h3>Organization</h3>
+                <p>To help you bring order to your plans, goals, and thoughts with elegant simplicity.</p>
+            </div>
+            <div class="value">
+                <div class="icon-container">
+                    <span class="material-symbols-outlined">self_improvement</span>
+                </div>
+                <h3>Mindfulness</h3>
+                <p>To encourage moments of reflection and intention in your daily life.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact" class="mb-5 mt-5">
+    <div class="row g-5">
+        <div class="col-md-6" data-aos="fade-right">
+            <h2 class="h1 fw-bold mb-4">Get in Touch</h2>
+            <p class="text-muted mb-5">Have a question or a brilliant idea? We'd love to hear from you. Fill out the form, and we'll get back to you as soon as possible.</p>
+            <div class="d-flex align-items-center mb-3">
+                <span class="material-symbols-outlined me-3" style="color: var(--primary);">mail</span>
+                <span>stilljournals@gmail.com</span>
+            </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+            <!-- Success Message (Hidden by default) -->
+            <div id="contact-response" class="p-4 text-center" style="display: none; background-color: #e8f5e9; border-radius: 12px; border: 1px solid #c8e6c9;">
+                <span class="material-symbols-outlined mb-3" style="font-size: 48px; color: #2e7d32;">check_circle</span>
+                <h3 class="h4 text-success fw-bold">Your Message has been sent successfully!</h3>
+                <p class="text-muted">Thank you for contacting us. We will review your message and get back to you at <strong>stilljournals@gmail.com</strong> shortly.</p>
+                <button class="btn btn-outline-custom text-dark mt-3" onclick="location.reload()">Send Another Message</button>
+            </div>
+
+            <!-- Contact Form -->
+            <form id="contact-form">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                </div>
+                <!-- Added Message Box -->
+                <div class="mb-4">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Write your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary-custom w-100 btn-lg">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+</main>
+<!-- Footer -->
+<div class="footer-main">
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <h2 style="margin-right: 7rem;">The Still Journals</h2>
+          <p>Your trusted companion for diaries, journals & planners.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#hero">Home</a>
+          <a href="#products">Products</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 The Still Journals — All rights reserved.</p>
+      </div>
+    </footer>
+</div>
+<!-- Mobile Bottom Navigation -->
+<nav class="bottom-nav">
+    <a href="#hero" class="bottom-nav-item active" id="nav-hero">
+        <span class="material-symbols-outlined">home</span>
+        <span>Home</span>
+    </a>
+    <a href="#products" class="bottom-nav-item" id="nav-products">
+        <span class="material-symbols-outlined">grid_view</span>
+        <span>Shop</span>
+    </a>
+    <a href="#about" class="bottom-nav-item" id="nav-about">
+        <span class="material-symbols-outlined">info</span>
+        <span>About</span>
+    </a>
+    <a href="#" class="bottom-nav-item" id="nav-cart">
+        <span class="material-symbols-outlined">shopping_cart</span>
+        <span>Cart</span>
+        <span class="badge rounded-pill cart-count-badge bottom-cart-badge" id="bottom-cart-count">0</span>
+    </a>
+    <a href="#contact" class="bottom-nav-item" id="nav-contact">
+        <span class="material-symbols-outlined">mail</span>
+        <span>Contact</span>
+    </a>
+</nav>
+<!-- MODALS -->
+<!-- Product Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pm-title">Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body product-modal-body p-0">
+          <div class="product-page">
+              <div class="product-image">
+                  <img id="pm-image" src="" alt="Product Image">
+              </div>
+              <div class="product-info">
+                  <h1 id="pm-title-h1">Product Title</h1>
+                  <div class="price"><h2 id="pm-price">$0.00</h2></div>
+                  <h6 class="mt-3">Color: <span id="pm-color-name">Color</span></h6>
+                  <div class="d-flex gap-2 mt-2" id="pm-colors"></div>
+                  <h6 class="mt-4">Paper Type</h6>
+                  <div class="d-flex gap-2 mt-2" id="pm-paper-type">
+                      <button class="btn-option selected" data-type="Lined">Lined</button>
+                      <button class="btn-option" data-type="Blank">Blank</button>
+                  </div>
+                  <div class="d-flex align-items-center gap-3 mt-4">
+                      <div class="quantity-box">
+                          <button class="qty-btn" id="pm-decrease">-</button>
+                          <span id="pm-quantity">1</span>
+                          <button class="qty-btn" id="pm-increase">+</button>
+                      </div>
+                      <button id="pm-add-to-cart" class="col-md-6 btn-checkout"><i class="bi bi-bag"></i> Add to Cart</button>
+                  </div>
+                   <!-- Download Button -->
+                      
+                      
+                  <div class="product-description mt-4">
+                    <h5>Product Description</h5>
+                    <div id="pm-description"></div>
+                  </div>
+                  <div class="mt-4">
+                        <a href="Product-Descriptions\Product_Description.docx" download>
+                           <button id="pm-download-btn" class="btn btn-primary-custom w-50" style="font-size: 1rem;gap: 0.5rem;">
+                              <i class="bi bi-download"></i>&nbsp;Download&nbsp;Detail&nbsp;Description
+                          </button>
+                          </a>
+                      </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content p-3">
+            <h4>Your Cart</h4>
+            <div id="cart-items" class="mb-2"></div>
+            <div id="cart-total" class="fw-bold mb-3 text-end h5"></div>
+            <div class="d-flex gap-2">
+                <button id="checkout-btn" class="btn btn-checkout flex-grow-1">Proceed to Checkout</button>
+                <button id="clear-cart-btn" class="btn btn-outline-secondary">Clear Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Progress Bar -->
+                <div class="checkout-progress-bar">
+                    <div class="step active" id="checkout-step-1-indicator">
+                        <div class="text-xs fw-bold">Shipping</div>
+                    </div>
+                    <div class="step" id="checkout-step-2-indicator">
+                        <div class="text-xs fw-bold">Payment</div>
+                    </div>
+                    <div class="step" id="checkout-step-3-indicator">
+                        <div class="text-xs fw-bold">Review</div>
+                    </div>
+                </div>
+                <!-- Step 1: Shipping Details -->
+                <div class="checkout-step" id="checkout-step-1">
+                    <h5>Shipping Information</h5>
+                    <form id="shipping-form">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email-checkout" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email-checkout" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Shipping Address</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                    </form>
+                </div>
+                <!-- Step 2: Payment Method -->
+                <div class="checkout-step" id="checkout-step-2" style="display: none;">
+                    <h5>Payment Method</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="Credit Card" checked>
+                        <label class="form-check-label" for="creditCard">Credit/Debit Card</label>
+                    </div>
+                    <div id="credit-card-form" class="mt-2">
+                        <div class="mb-2">
+                            <input type="text" class="form-control" placeholder="Card Number">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" placeholder="MM/YY">
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <input type="text" class="form-control" placeholder="CVC">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="PayPal">
+                        <label class="form-check-label" for="paypal">PayPal</label>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="cod" value="Cash on Delivery">
+                        <label class="form-check-label" for="cod">Cash on Delivery</label>
+                    </div>
+                </div>
+                <!-- Step 3: Order Review -->
+                <div class="checkout-step" id="checkout-step-3" style="display: none;">
+                    <h5>Review Your Order</h5>
+                    <div id="order-review-summary">
+                        <!-- Summary will be injected here -->
+                    </div>
+                </div>
+                <!-- Step 4: Order Success -->
+                <div class="checkout-step text-center py-5" id="checkout-step-4" style="display: none;">
+                    <h4 class="text-success">Thank You!</h4>
+                    <p>Your order has been placed successfully.</p>
+                    <p class="fw-bold">Order Number: <span id="order-number"></span></p>
+                    <p class="text-muted small">A confirmation email will be sent to you shortly.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="checkout-back-btn" style="display: none;">Back</button>
+                <button type="button" class="btn btn-primary-custom" id="checkout-next-btn">Next</button>
+                <button type="button" class="btn btn-primary-custom" id="checkout-place-order-btn" style="display: none;">Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 700,
+            easing: 'ease-out-cubic',
+            offset: 120
+        });
+    // Typewriter effect
+    function initTypewriter() {
+        const typeTextElement = document.getElementById("typeText");
+        if (!typeTextElement) return;
+        const text = "Plan your year beautifully";
+        let i = 0;
+        const speed = 75;
+        function typeCharacter() {
+            if (i < text.length) {
+                typeTextElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeCharacter, speed);
+            } else {
+                typeTextElement.style.animation = "none";
+                typeTextElement.style.borderRight = "none";
+                typeTextElement.style.paddingRight = "0";
+            }
+        }
+        typeTextElement.textContent = "";
+        typeTextElement.style.borderRight = "3px solid white";
+        typeTextElement.style.animation = "cursorBlink 0.7s infinite";
+        typeCharacter();
+    }
+    initTypewriter();
+    
+    // --- NEW: Contact Form Validation and Logic ---
+    const contactForm = document.getElementById('contact-form');
+    const contactResponse = document.getElementById('contact-response');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the default page reload
+
+            // Get values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Validation Logic
+            if (!name || !email || !message) {
+                alert("Please fill in all fields (Name, Email, and Message).");
+                return;
+            }
+
+            // Simulate Sending (Hides form, Shows success message)
+            contactForm.style.display = 'none';
+            contactResponse.style.display = 'block';
+            
+            // Note: To ACTUALLY send an email via JS, you need a backend service like EmailJS or Formspree.
+            // The line below attempts to open the user's mail client as a backup behavior.
+            // window.location.href = `mailto:stilljournals@gmail.com?subject=New Message from ${name}&body=${message}`;
+        });
+    }
+
+    // Product data with updated local image paths
+    const productData = {
+        journal1: { key: 'journal1', title: 'Blue Artisan Journal', image: 'Product-Images/journaltype1-blue.png', price: 28, type: 'journal', colors: [{ name: 'Blue', hex: '#2e5c8a', image: 'Product-Images/journaltype1-blue.png' }, { name: 'Green', hex: '#3b5e52', image: 'Product-Images/journaltype1-green.png' }, { name: 'Red', hex: '#9d3b3b', image: 'Product-Images/journaltype1-red.png' }, { name: 'Black', hex: '#2c2c2c', image: 'Product-Images/journaltype1-black.png' }], description: 'A deep-blue artisan journal with premium pages...' },
+        journal2: { key: 'journal2', title: 'Sandstone Planner', image: 'Product-Images/journaltype2-brown.png', price: 28, type: 'journal', colors: [{ name: 'Brown', hex: '#a58a74', image: 'Product-Images/journaltype2-brown.png' }, { name: 'Green', hex: '#6b7a6c', image: 'Product-Images/journaltype2-green.png' }, { name: 'Blue', hex: '#7a96a3', image: 'Product-Images/journaltype2-blue.png' }, { name: 'Red', hex: '#a87a7b', image: 'Product-Images/journaltype2-red.png' }], description: 'Minimalist sand-toned journal with smooth paper...' },
+        diary1: { key: 'diary1', title: 'Classic Diary', image: 'Product-Images/diarytype1-green.png', price: 22, type: 'diary', colors: [{ name: 'Green', hex: '#838b67', image: 'Product-Images/diarytype1-green.png' }, { name: 'Blue', hex: '#6a8497', image: 'Product-Images/diarytype1-blue.png' }, { name: 'Red', hex: '#a66a6a', image: 'Product-Images/diarytype1-red.png' }, { name: 'Black', hex: '#4e4e4e', image: 'Product-Images/diarytype1-black.png' }], description: 'Classic diary with lined pages for daily thoughts.' },
+        diary2: { key: 'diary2', title: 'Compact Diary', image: 'Product-Images/diarytype2-black.png', price: 22, type: 'diary', colors: [{ name: 'White', hex: '#0000', image: 'Product-Images/diarytype2-white.png' }, { name: 'Blue', hex: '#778ca3', image: 'Product-Images/diarytype2-blue.png' }, { name: 'Black', hex: '#000000', image: 'Product-Images/diarytype2-black.png' }, { name: 'Brown', hex: '#a38777', image: 'Product-Images/diarytype2-brown.png' }], description: 'A small, compact diary for everyday planning on the go.' },
+        calendar1: { key: 'calendar1', title: 'Artisan Calendar', image: 'Product-Images/calendartype1-black.png', price: 16, type: 'calendar', colors: [{ name: 'Black', hex: '#4e4e4e', image: 'Product-Images/calendartype1-black.png' }, { name: 'Blue', hex: '#6a8497', image: 'Product-Images/calendartype1-blue.png' }, { name: 'Green', hex: '#838b67', image: 'Product-Images/calendartype1-green.png' }, { name: 'Red', hex: '#a66a6a', image: 'Product-Images/calendartype1-red.png' }], description: 'Yearly calendar with unique artisan illustrations.' },
+        calendar2: { key: 'calendar2', title: 'Wall Calendar', image: 'Product-Images/calendartype2-white.png', price: 16, type: 'calendar', colors: [{ name: 'White', hex: '#f0f0f0', image: 'Product-Images/calendartype2-white.png' }, { name: 'Blue', hex: '#7a96a3', image: 'Product-Images/calendartype2-blue.png' }, { name: 'Green', hex: '#6b7a6c', image: 'Product-Images/calendartype2-green.png' }, { name: 'Red', hex: '#a87a7b', image: 'Product-Images/calendartype2-red.png' }], description: 'A large wall calendar with plenty of space for notes.' },
+        // ADDED: Data for the 6 new products
+        journal3: { key: 'journal3', title: 'Premium Journal', image: 'Product-Images/premium-journaltype3-black.png', price: 32, type: 'journal', colors: [{ name: 'Black', hex: '#3a3a3a', image: 'Product-Images/premium-journaltype3-black.png' }, { name: 'White', hex: '#f0ede5', image: 'Product-Images/premium-journaltype3-white.png' }], description: 'A premium journal for the discerning writer, featuring a compass emblem.' },
+        diary3: { key: 'diary3', title: 'Executive Diary', image: 'Product-Images/premium-diarytype4-black.png', price: 26, type: 'diary', colors: [{ name: 'Black', hex: '#414141', image: 'Product-Images/premium-diarytype4-black.png' }, { name: 'White', hex: '#e9e4d9', image: 'Product-Images/premium-diarytype4-white.png' }], description: 'Sleek and professional black diary for your daily schedule and notes.' },
+        calendar3: { key: 'calendar3', title: 'Desk Calendar', image: 'Product-Images/calendartype3-blue.png', price: 18, type: 'calendar', colors: [{ name: 'Blue', hex: '#8ab4c3', image: 'Product-Images/calendartype3-blue.png' }, { name: 'Brown', hex: '#c3a68a', image: 'Product-Images/calendartype3-brown.png' }, { name: 'Red', hex: '#c38a8a', image: 'Product-Images/calendartype3-red.png' }], description: 'A stylish desk calendar with beautiful scenic views for each month.' },
+        journal4: { key: 'journal4', title: 'Minimalist Journal', image: 'Product-Images/journaltype4-white.png', price: 25, type: 'journal', colors: [{ name: 'White', hex: '#f0f0f0', image: 'Product-Images/journaltype4-white.png' }, { name: 'Black', hex: '#4e4e4e', image: 'Product-Images/journaltype4-black.png' }, { name: 'Brown', hex: '#9d7e6a', image: 'Product-Images/journaltype4-brown.png' }], description: 'A clean and simple journal for your thoughts, with a focus on minimalism.' },
+        diary4: { key: 'diary4', title: 'Simple Diary', image: 'Product-Images/diarytype5-white.png', price: 26, type: 'diary', colors: [
+    { name: 'White', hex: '#f0f0f0', image: 'Product-Images/diarytype5-white.png' },
+    { name: 'Black', hex: '#414141', image: 'Product-Images/diarytype5-black.png' },
+    { name: 'Orange', hex: '#ff7700', image: 'Product-Images/diarytype5-orange.png' }
+], description: 'An elegant ivory diary with a soft-touch cover and premium gilded pages.' },
+        calendar4: { key: 'calendar4', title: 'Nature Calendar', image: 'Product-Images/nature-calendartype4-green.png', price: 20, type: 'calendar', colors: [{ name: 'Green', hex: '#2e5e52', image: 'Product-Images/nature-calendartype4-green.png' }, { name: 'Peach', hex: '#e4b59e', image: 'Product-Images/minimal-calendartype4-peach.png' }, { name: 'Off-White', hex: '#e6e6e6', image: 'Product-Images/simple-calendartype4-offwhite.png' }], description: 'A stunning wall calendar featuring breathtaking nature photography from around the world.' }
+    };
+    // --- DOM Elements ---
+    const cartIcon = document.getElementById('cart-icon'), cartCountEl = document.getElementById('cart-count'), cartItemsContainer = document.getElementById('cart-items'), cartTotalEl = document.getElementById('cart-total'), checkoutBtn = document.getElementById('checkout-btn'), clearCartBtn = document.getElementById('clear-cart-btn');
+    const productModalEl = document.getElementById('productModal'), bsProductModal = new bootstrap.Modal(productModalEl);
+    const pmTitle = document.getElementById('pm-title'), pmTitleH1 = document.getElementById('pm-title-h1'), pmImage = document.getElementById('pm-image'), pmPrice = document.getElementById('pm-price'), pmColors = document.getElementById('pm-colors'), pmColorName = document.getElementById('pm-color-name'), pmDescription = document.getElementById('pm-description'), pmQuantityEl = document.getElementById('pm-quantity'), pmIncrease = document.getElementById('pm-increase'), pmDecrease = document.getElementById('pm-decrease'), pmAddToCartBtn = document.getElementById('pm-add-to-cart');
+    const navCart = document.getElementById('nav-cart'), bottomCartCount = document.getElementById('bottom-cart-count');
+    // --- Search and Filter Elements ---
+    const productSearchInput = document.getElementById('product-search-input');
+    const filterButtons = document.querySelectorAll('.filter-buttons .btn');
+    const allProductCards = document.querySelectorAll('.product-grid .card');
+    // --- Combined Search and Filter Logic ---
+    function updateProductVisibility() {
+        const activeFilter = document.querySelector('.filter-buttons .btn.active').dataset.filter;
+        const searchTerm = productSearchInput.value.toLowerCase();
+        allProductCards.forEach(card => {
+            const productTitle = card.querySelector('.prod-title').textContent.toLowerCase();
+            const productDesc = card.querySelector('.prod-desc').textContent.toLowerCase();
+            const productType = card.dataset.type.toLowerCase();
+            const matchesFilter = (activeFilter === 'all' || productType === activeFilter);
+            const matchesSearch = (searchTerm === '' || productTitle.includes(searchTerm) || productDesc.includes(searchTerm) || productType.includes(searchTerm));
+            if (matchesFilter && matchesSearch) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    productSearchInput.addEventListener('input', updateProductVisibility);
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            updateProductVisibility();
+        });
+    });
+    // --- Cart Logic ---
+    const CART_KEY = 'thestilljournals_cart';
+    function getCart() { try { const r = localStorage.getItem(CART_KEY); return r ? JSON.parse(r) : [] } catch (e) { return [] } }
+    function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); renderCartCount(); }
+    function addToCart(i) { const c = getCart(); const e = c.find(item => item.productKey === i.productKey && item.color === i.color && item.type === i.type); if (e) e.quantity += i.quantity; else c.push(i); saveCart(c); }
+    function clearCart() { localStorage.removeItem(CART_KEY); renderCartCount(); }
+    // --- Modal and UI Functions ---
+    function openProduct(key) {
+        const p = productData[key]; 
+        if (!p) return;
+        pmTitle.textContent = p.title; 
+        pmTitleH1.textContent = p.title; 
+        pmImage.src = p.image; 
+        pmPrice.textContent = '$' + p.price.toFixed(2); 
+        pmDescription.textContent = p.description; 
+        pmQuantityEl.textContent = '1';
+        renderColors(p.colors || [{ name: 'Default', hex: '#ccc', image: p.image }]);
+        document.querySelectorAll('#pm-paper-type .btn-option').forEach((b, i) => b.classList.toggle('selected', i === 0));
+        productModalEl.dataset.currentProduct = key;
+        bsProductModal.show();
+    }
+    function renderColors(colors) {
+        pmColors.innerHTML = '';
+        colors.forEach((c, i) => {
+            const div = document.createElement('div');
+            div.className = 'color-circle';
+            div.style.backgroundColor = c.hex;
+            div.dataset.color = c.name;
+            div.dataset.image = c.image;
+            if (i === 0) { 
+                div.classList.add('active'); 
+                pmColorName.textContent = c.name;
+                pmImage.src = c.image;
+            }
+            div.addEventListener('click', () => { 
+                pmColors.querySelectorAll('.color-circle').forEach(x => x.classList.remove('active')); 
+                div.classList.add('active'); 
+                pmColorName.textContent = c.name;
+                pmImage.src = div.dataset.image;
+            });
+            pmColors.appendChild(div);
+        });
+    }
+    document.querySelectorAll('.open-product').forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); openProduct(btn.dataset.product); }));
+    pmIncrease?.addEventListener('click', () => pmQuantityEl.textContent = parseInt(pmQuantityEl.textContent) + 1);
+    pmDecrease?.addEventListener('click', () => { let q = parseInt(pmQuantityEl.textContent); if (q > 1) pmQuantityEl.textContent = q - 1; });
+    document.querySelectorAll('#pm-paper-type .btn-option').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('#pm-paper-type .btn-option').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); }));
+    pmAddToCartBtn.addEventListener('click', () => {
+        const key = productModalEl.dataset.currentProduct, p = productData[key]; 
+        if (!p) return;
+        const item = { productKey: key, name: p.title, price: p.price, color: document.querySelector('#pm-colors .color-circle.active')?.dataset.color || 'Default', type: document.querySelector('#pm-paper-type .btn-option.selected')?.dataset.type || 'Lined', quantity: parseInt(pmQuantityEl.textContent) };
+        addToCart(item);
+        bsProductModal.hide();
+        [cartIcon, navCart].forEach(btn => {
+            if(btn) btn.animate([ { transform: 'scale(1)' }, { transform: 'scale(1.2)' }, { transform: 'scale(1)' } ], { duration: 300 });
+        });
+    });
+    function renderCartCount() { 
+        const count = getCart().reduce((s, i) => s + i.quantity, 0);
+        if(cartCountEl) cartCountEl.textContent = count;
+        if(bottomCartCount) bottomCartCount.textContent = count;
+    }
+    function renderCart() {
+        const c = getCart(); 
+        cartItemsContainer.innerHTML = c.length ? '' : '<p class="text-center text-muted">Your cart is empty.</p>'; 
+        checkoutBtn.disabled = c.length === 0;
+        let total = 0;
+        c.forEach(it => {
+            const itemTotal = it.price * it.quantity; 
+            total += itemTotal;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'd-flex justify-content-between align-items-center py-2 border-bottom';
+            wrapper.innerHTML = `<div><div class="fw-bold">${it.name}</div><div class="small text-muted">${it.color} / ${it.type}</div><div class="small">Qty: ${it.quantity}</div></div><div class="fw-bold">$${itemTotal.toFixed(2)}</div>`;
+            cartItemsContainer.appendChild(wrapper);
+        });
+        cartTotalEl.textContent = c.length ? 'Total: $' + total.toFixed(2) : '';
+    }
+    const bsCartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+    cartIcon.addEventListener('click', () => { renderCart(); bsCartModal.show(); });
+    navCart.addEventListener('click', (e) => { e.preventDefault(); renderCart(); bsCartModal.show(); });
+    clearCartBtn?.addEventListener('click', () => { if (confirm('Clear the cart?')) { clearCart(); renderCart(); } });
+    // --- Checkout Logic ---
+    const bsCheckoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+    const checkoutSteps = document.querySelectorAll('.checkout-step'), checkoutNextBtn = document.getElementById('checkout-next-btn'), checkoutBackBtn = document.getElementById('checkout-back-btn'), checkoutPlaceOrderBtn = document.getElementById('checkout-place-order-btn');
+    let currentCheckoutStep = 1;
+    function showCheckoutStep(stepNumber) {
+        checkoutSteps.forEach(step => step.style.display = 'none');
+        document.getElementById(`checkout-step-${stepNumber}`).style.display = 'block';
+        document.querySelectorAll('.checkout-progress-bar .step').forEach((step, index) => step.classList.toggle('active', index < stepNumber));
+        checkoutBackBtn.style.display = stepNumber > 1 && stepNumber < 4 ? 'inline-block' : 'none';
+        checkoutNextBtn.style.display = stepNumber < 3 ? 'inline-block' : 'none';
+        checkoutPlaceOrderBtn.style.display = stepNumber === 3 ? 'inline-block' : 'none';
+        if (stepNumber === 4) document.querySelector('#checkoutModal .modal-footer').style.display = 'none';
+    }
+    checkoutBtn.addEventListener('click', () => { if (getCart().length) { bsCartModal.hide(); bsCheckoutModal.show(); currentCheckoutStep = 1; showCheckoutStep(1); } });
+    checkoutNextBtn.addEventListener('click', () => {
+        if (currentCheckoutStep === 1 && !document.getElementById('shipping-form').checkValidity()) { document.getElementById('shipping-form').reportValidity(); return; }
+        if (currentCheckoutStep < 3) { currentCheckoutStep++; if (currentCheckoutStep === 3) populateOrderReview(); showCheckoutStep(currentCheckoutStep); }
+    });
+    checkoutBackBtn.addEventListener('click', () => { if (currentCheckoutStep > 1) { currentCheckoutStep--; showCheckoutStep(currentCheckoutStep); } });
+    checkoutPlaceOrderBtn.addEventListener('click', () => { currentCheckoutStep = 4; document.getElementById('order-number').textContent = `TS-${Math.floor(Math.random() * 90000) + 10000}`; showCheckoutStep(4); clearCart(); });
+    function populateOrderReview() {
+        const cart = getCart(), shipping = { name: document.getElementById('fullName').value, address: document.getElementById('address').value }, paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        let cartHtml = cart.map(item => `<div class="d-flex justify-content-between"><span>${item.name} (x${item.quantity})</span><strong>$${(item.price * item.quantity).toFixed(2)}</strong></div>`).join('');
+        let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        document.getElementById('order-review-summary').innerHTML = `<div class="border rounded p-3"><h6>Items</h6>${cartHtml}<hr><div class="d-flex justify-content-between h5"><span>Total</span><strong>$${total.toFixed(2)}</strong></div></div><div class="border rounded p-3 mt-3"><h6>Shipping To</h6><p class="mb-0"><strong>${shipping.name}</strong></p><p class="mb-0 text-muted">${shipping.address}</p></div><div class="border rounded p-3 mt-3"><h6>Payment Method</h6><p class="mb-0 text-muted">${paymentMethod}</p></div>`;
+    }
+    // --- Scrollspy for Mobile Nav ---
+    const sections = document.querySelectorAll('section[id]'), navItems = document.querySelectorAll('.bottom-nav-item');
+    const observer = new IntersectionObserver(entries => {
+        if (window.innerWidth > 768) return;
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navItems.forEach(item => {
+                    item.classList.toggle('active', item.getAttribute('href').substring(1) === entry.target.id);
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    sections.forEach(section => observer.observe(section));
+    // Initial render
+    (function init() {
+        renderCartCount(); 
+    })();
+});
+</script>
+</body>
+</html>
